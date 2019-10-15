@@ -7,4 +7,6 @@ HomeFlix - Local Streaming WebSite.
 - Python
 - JavaScript
 
-![image of homeflix](https://github.com/AmitNiz/homeflix/homeflix.png)
+## preview 
+
+![image of homeflix](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/homeflix.png)
