@@ -19,6 +19,8 @@
             document.querySelector('.mp4').src =series_src(s,e,'mp4');
             document.querySelector('.mkv').src =series_src(s,e,'mkv');
             document.querySelector('video').load();
+            document.querySelector('video').play();
+
        }
     });
 
