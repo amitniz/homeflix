@@ -25,7 +25,7 @@ for t in types:
             if t == 'series':
                 seasons = [s for s in os.listdir(os.path.join(LOCATION,t,g,item)) if os.path.isdir(os.path.join(LOCATION,t,g,item,s))]
                 episodes=[]
-                for s in seasons:
+                for s in sorted(seasons):
                     episodes.append(len(os.listdir(os.path.join(LOCATION,t,g,item,s))))
 
                 sub_dirs = dict(zip(['src','location','genre','name','seasons','episodes'],
