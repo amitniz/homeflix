@@ -1,10 +1,23 @@
 
+    
+
+
     document.addEventListener('click', e=>{
-      if(e.target.parentNode.className!='player'&&e.target.parentNode.parentNode.className!='info'&&e.target.parentNode.className!='Carousel'){
+      if(e.target.parentNode.className!='player'&&e.target.nodeName!='LI'&&e.target.parentNode.parentNode.className!='info'&&e.target.parentNode.className!='Carousel'){
           close_panels();
           e.target.parentNode.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     })
+
+    var seasons_lis = document.querySelector('.seasons');
+        seasons_lis.addEventListener('click',e=>{
+            console.log(e.target.nodeName);
+            if(e.target.nodeName =='LI'){
+                var s=e.target.innerHTML.split(' ')[1];
+                console.log(s);
+                update_episodes_block(Number(s));
+            }
+        });
 
     var carousels = document.querySelectorAll('.Carousel');
     for(var i=0;i<carousels.length;i++){

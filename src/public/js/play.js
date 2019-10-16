@@ -16,7 +16,6 @@ function close_panels(){
 }
 function build_panel(obj,player){
     if(obj[0]){
-
         player.style.display ='flex';
         player.querySelector('.title').innerHTML = obj[0].name;
         player.querySelector('.description').innerHTML = 'Genre : ' +obj[0].genre
@@ -26,6 +25,10 @@ function build_panel(obj,player){
             player.querySelector('.mp4').src =obj[0].src
                 +'/season02'+'/1'+'.mp4'; 
             add_seasons(player);
+            player.querySelector('.episodes_block').innerHTML='';
+            for(var i=0;i<obj[0].seasons;i++){
+                add_episodes(player,i);
+            }
         }else{
             player.querySelector('.mkv').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mkv'; 
             player.querySelector('.mp4').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mp4'; 
@@ -46,13 +49,31 @@ function add_seasons(player){
 }
 
 function add_episodes(player,season){
-    var episodes_list = player.querySelector('.episodes');
-    episodes_list.innerHTML='';
+    var block = player.querySelector('.episodes_block');
+    var episode_ui = document.createElement('ui');
     for(var i=1;i<=obj[0].episodes[season];i++){
         var elem = document.createElement('li');
-        elem.setAttribute('id',season);
+        elem.setAttribute('id','E'+i);
         elem.innerHTML ='episode '+i;
-        episodes_list.appendChild(elem);
+        episode_ui.setAttribute('id','S'+season);
+        episode_ui.setAttribute('class','episodes');
+        episode_ui.appendChild(elem);
     }
+    
+    block.appendChild(episode_ui);
+    update_episodes_block(1);
+}
+
+function select_li(li){
+    reset_selected_li(li.parentNode);
+    li.setAttribute('class','selected');
+}
+
+function update_episodes_block(s){
+    var episodes_uis = document.querySelectorAll('.episodes_block ui');
+    for(var i=0;i<episodes_uis.length;i++){
+        episodes_uis[i].style.display= 'none';
+    }
+    episodes_uis[s-1].style.display ='block';
 }
 
