@@ -1,4 +1,10 @@
 
+    document.addEventListener('click', e=>{
+      if(e.target.parentNode.className!='player'&&e.target.parentNode.parentNode.className!='info'&&e.target.parentNode.className!='Carousel'){
+          close_panels();
+          e.target.parentNode.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    })
 
     var carousels = document.querySelectorAll('.Carousel');
     for(var i=0;i<carousels.length;i++){
@@ -14,7 +20,13 @@
 
       carousels[i].addEventListener('click',e=>{
           if(e.target.className !="Carousel"){
+              if(!window.panel_state){
                  open_panel(e.target.id,e.target.parentNode.parentNode);
+              }else{
+                  close_panels();
+                  e.target.scrollIntoView({ behavior: 'smooth', block: 'end' });
+              }
+              
           }})
     }
 

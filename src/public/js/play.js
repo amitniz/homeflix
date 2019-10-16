@@ -1,15 +1,9 @@
 
-
-document.addEventListener('click', e=>{
-  if(e.target.parentNode.className!='player'&&e.target.parentNode.parentNode.className!='info'){
-      close_panels();
-  }
-})
-
 function open_panel(id,block){
     var player = block.querySelector('.player');
     use_data('/q?type=movies&_id='+id,player,build_panel);
     use_data('/q?type=series&_id='+id,player,build_panel);
+    window.panel_state= true;
 }
 
 function close_panels(){
@@ -18,6 +12,7 @@ function close_panels(){
         players[i].style.display ='none';
         players[i].querySelector('video').pause();
   }
+    window.panel_state=false;
 }
 function build_panel(obj,player){
     if(obj[0]){
@@ -41,7 +36,7 @@ function build_panel(obj,player){
             player.querySelector('.mkv').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mkv'; 
             player.querySelector('.mp4').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mp4'; 
         }
-        player.scrollIntoView(false);
+        player.scrollIntoView({ behavior: 'smooth', block: 'center' });
         player.querySelector('video').load();
     }
 }
