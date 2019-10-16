@@ -6,7 +6,7 @@ const data_location= '../dataBase'
 mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/homeFlix',{ useUnifiedTopology: true, useNewUrlParser: true })
 
-var series_scm = new mongoose.Schema({name:String,img:String,episodes:Number,location:String
+var series_scm = new mongoose.Schema({name:String,img:String,episodes:Array,location:String
                                  ,genre:String,seasons:String})
 var movies_scm = new mongoose.Schema({name:String,img:String,location:String,genre:String})
 

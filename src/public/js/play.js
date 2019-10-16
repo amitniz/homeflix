@@ -25,13 +25,7 @@ function build_panel(obj,player){
                 +'/season02'+'/1'+'.mkv'; 
             player.querySelector('.mp4').src =obj[0].src
                 +'/season02'+'/1'+'.mp4'; 
-            var seasons_list = player.querySelector('.seasons');
-            seasons_list.innerHTML='';
-            for(var i=1;i<=obj[0].seasons;i++){
-                var elem= document.createElement('li');
-                elem.innerHTML= 'season '+i;
-                seasons_list.appendChild(elem);
-                }
+            add_seasons(player);
         }else{
             player.querySelector('.mkv').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mkv'; 
             player.querySelector('.mp4').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mp4'; 
@@ -41,4 +35,24 @@ function build_panel(obj,player){
     }
 }
 
+function add_seasons(player){
+    var seasons_list = player.querySelector('.seasons');
+    seasons_list.innerHTML='';
+    for(var i=1;i<=obj[0].seasons;i++){
+        var elem= document.createElement('li');
+        elem.innerHTML= 'season '+i;
+        seasons_list.appendChild(elem);
+    }
+}
+
+function add_episodes(player,season){
+    var episodes_list = player.querySelector('.episodes');
+    episodes_list.innerHTML='';
+    for(var i=1;i<=obj[0].episodes[season];i++){
+        var elem = document.createElement('li');
+        elem.setAttribute('id',season);
+        elem.innerHTML ='episode '+i;
+        episodes_list.appendChild(elem);
+    }
+}
 
