@@ -1,4 +1,5 @@
 
+
 function open_panel(id,block){
     var player = block.querySelector('.player');
     use_data('/q?type=movies&_id='+id,player,build_panel);
@@ -20,18 +21,16 @@ function build_panel(obj,player){
         player.querySelector('.title').innerHTML = obj[0].name;
         player.querySelector('.description').innerHTML = 'Genre : ' +obj[0].genre
         if(obj[0].seasons){
-            player.querySelector('.mkv').src =obj[0].src
-                +'/season02'+'/1'+'.mkv'; 
-            player.querySelector('.mp4').src =obj[0].src
-                +'/season02'+'/1'+'.mp4'; 
+            player.querySelector('.mkv').src =obj[0].src +'/s1/e1.mkv'; 
+            player.querySelector('.mp4').src =obj[0].src +'/s1/e1.mp4'; 
             add_seasons(player);
             player.querySelector('.episodes_block').innerHTML='';
             for(var i=0;i<obj[0].seasons;i++){
                 add_episodes(player,i);
             }
         }else{
-            player.querySelector('.mkv').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mkv'; 
-            player.querySelector('.mp4').src =obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.mp4'; 
+            player.querySelector('.mkv').src =movie_src('mp4');
+            player.querySelector('.mp4').src =movie_src('mp4');
         }
         player.scrollIntoView({ behavior: 'smooth', block: 'center' });
         player.querySelector('video').load();
@@ -53,9 +52,9 @@ function add_episodes(player,season){
     var episode_ui = document.createElement('ui');
     for(var i=1;i<=obj[0].episodes[season];i++){
         var elem = document.createElement('li');
-        elem.setAttribute('id','E'+i);
+        elem.setAttribute('id','e'+i);
         elem.innerHTML ='episode '+i;
-        episode_ui.setAttribute('id','S'+season);
+        episode_ui.setAttribute('id','s'+(season+1));
         episode_ui.setAttribute('class','episodes');
         episode_ui.appendChild(elem);
     }
@@ -77,3 +76,11 @@ function update_episodes_block(s){
     episodes_uis[s-1].style.display ='block';
 }
 
+function movie_src(ext){
+    return obj[0].src+'/'+obj[0].name.replace(' ','_').toLowerCase()+'.'+ext; 
+}
+
+
+function series_src(season,episode,ext){
+    return obj[0].src+'/'+season+'/'+episode+'.'+ext; 
+}

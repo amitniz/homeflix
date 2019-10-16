@@ -9,6 +9,19 @@
       }
     })
 
+    var episodes_block =document.querySelector('.episodes_block');
+    episodes_block.addEventListener('click',e=>{
+        if(e.target.nodeName=='LI'){
+            var s = e.target.parentNode.id;
+            var e = e.target.id;
+            console.log(s,e);
+            //need to choose from player.
+            document.querySelector('.mp4').src =series_src(s,e,'mp4');
+            document.querySelector('.mkv').src =series_src(s,e,'mkv');
+            document.querySelector('video').load();
+       }
+    });
+
     var seasons_lis = document.querySelector('.seasons');
         seasons_lis.addEventListener('click',e=>{
             console.log(e.target.nodeName);
