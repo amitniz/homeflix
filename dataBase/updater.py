@@ -24,12 +24,12 @@ for t in types:
             src = os.path.join(LOCATION,t,g,item)
             if t == 'series':
                 seasons = [s for s in os.listdir(os.path.join(LOCATION,t,g,item)) if os.path.isdir(os.path.join(LOCATION,t,g,item,s))]
-                num_of_episodes = 0
+                episodes=[]
                 for s in seasons:
-                    num_of_episodes+= len(os.listdir(os.path.join(LOCATION,t,g,item,s)))
+                    episodes.append(len(os.listdir(os.path.join(LOCATION,t,g,item,s))))
 
                 sub_dirs = dict(zip(['src','location','genre','name','seasons','episodes'],
-                    [src,LOCATION,g,name(item),len(seasons),num_of_episodes]))
+                    [src,LOCATION,g,name(item),len(seasons),episodes]))
                 if db.series.find({"name":item}).count()==0:
                     db.series.insert_one(sub_dirs)
                     print "[+] Updated: ", sub_dirs

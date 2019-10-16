@@ -57,12 +57,17 @@ p{
     -moz-transition: 0.7s ease-in-out;
 }
 
-.seasons li{
+li{
     list-style:none;
     margin:1em;
     color:#aa0000;
     float:left;
 }
+
+li:hover{
+    background: rgba(30,30,30,0.5);
+}
+
 
 h3{
     border-bottom: 3px solid #aa0000;
