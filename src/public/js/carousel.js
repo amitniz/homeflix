@@ -1,22 +1,32 @@
 
 
-const SCALE_FACTOR =1.5;
-
-
     var carousels = document.querySelectorAll('.Carousel');
     for(var i=0;i<carousels.length;i++){
       carousels[i].addEventListener('mouseover',e =>{
           if(e.target.className != "Carousel"){
-              e.target.style.zIndex='1';
-              e.target.style.transform='scale(1.3,1.3)'}});
+              e.target.setAttribute('class','hover_img');    
+          }});
 
       carousels[i].addEventListener('mouseout',e=>{
           if(e.target.className != "Carousel"){
-            e.target.style.zIndex='0';
-            e.target.style.transform='scale(1,1)'}});
+            e.target.setAttribute('class','');
+          }});
 
       carousels[i].addEventListener('click',e=>{
           if(e.target.className !="Carousel"){
-              open_panel(e.target.id,e.target.parentNode.parentNode);
+                 open_panel(e.target.id,e.target.parentNode.parentNode);
           }})
+    }
+
+
+    var infos =document.querySelectorAll('.info');
+    for(var i=0;i<infos.length;i++){
+        infos[i].addEventListener('mouseover',function(){
+            this.style.opacity ='1';
+        });
+
+        infos[i].addEventListener('mouseout',function(){
+            this.style.opacity ='0';
+
+        });
     }

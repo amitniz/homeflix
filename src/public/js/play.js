@@ -1,10 +1,8 @@
 
-document.addEventListener('click', e=>{console.log('click');
+
+document.addEventListener('click', e=>{
   if(e.target.parentNode.className!='player'&&e.target.parentNode.parentNode.className!='info'){
-    var players = document.querySelectorAll('.player');
-    for(var i=0;i< players.length;i++){
-        players[i].style.display ='none';
-  }
+      close_panels();
   }
 })
 
@@ -14,6 +12,13 @@ function open_panel(id,block){
     use_data('/q?type=series&_id='+id,player,build_panel);
 }
 
+function close_panels(){
+    var players = document.querySelectorAll('.player');
+    for(var i=0;i< players.length;i++){
+        players[i].style.display ='none';
+        players[i].querySelector('video').pause();
+  }
+}
 function build_panel(obj,player){
     if(obj[0]){
 
