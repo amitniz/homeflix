@@ -44,6 +44,7 @@ function add_seasons(player){
         var elem= document.createElement('li');
         elem.innerHTML= 'season '+i;
         seasons_list.appendChild(elem);
+        if(i==1) select_li(elem);
     }
 }
 
@@ -57,15 +58,23 @@ function add_episodes(player,season){
         episode_ui.setAttribute('id','s'+(season+1));
         episode_ui.setAttribute('class','episodes');
         episode_ui.appendChild(elem);
+        if(i==1) select_li(elem);
     }
     
     block.appendChild(episode_ui);
     update_episodes_block(1);
 }
 
+function reset_selected_li(ui){
+    var lis= ui.childNodes;
+    for(var i=0;i<lis.length;i++){
+        lis[i].classList.remove('selected')
+    }
+}
+
 function select_li(li){
     reset_selected_li(li.parentNode);
-    li.setAttribute('class','selected');
+    li.classList.add('selected');
 }
 
 function update_episodes_block(s){

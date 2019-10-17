@@ -59,20 +59,33 @@ p{
 
 .seasons_block{
     float:left;
+    margin:0;
+    width:35%;
 }
 .episodes_block{
     float:left;
+    column-count: 2;
+    margin:0;
     height:50%;
+    width:60%;
+    padding-left:0.5em;
+    border-left: rgba(200,30,30,0.3) solid 3px;
 }
 
 li{
     list-style:none;
-    margin:1em;
+    width:100%;
+    margin:0;
+    padding:0.5em 0.5em;
     color:#fafafa;
 }
 
 li:hover{
-    background: rgba(200,30,30,0.5);
+    background: linear-gradient(90deg,rgba(200,150,170,0.3),rgba(0,0,0,0));
+}
+
+.selected{
+    background: linear-gradient(90deg,rgba(150,20,20,0.5),rgba(0,0,0,0));
 }
 
 
@@ -88,6 +101,7 @@ h2{
     margin-left: 1%;
 }
 
+
 .Carousel{
   margin:0;
   padding-left:0.5%;
@@ -96,6 +110,7 @@ h2{
   height:320px;
   display: flex;
   overflow-y: hidden;
+  overflow-x:scroll;
 }
 
 .Carousel img{

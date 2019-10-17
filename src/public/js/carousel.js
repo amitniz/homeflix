@@ -10,25 +10,26 @@
     })
 
     var episodes_block =document.querySelector('.episodes_block');
-    episodes_block.addEventListener('click',e=>{
-        if(e.target.nodeName=='LI'){
-            var s = e.target.parentNode.id;
-            var e = e.target.id;
-            console.log(s,e);
+    episodes_block.addEventListener('click',evt=>{
+        if(evt.target.nodeName=='LI'){
+            reset_selected_li(evt.target.parentNode);
+            select_li(evt.target);
+            var s = evt.target.parentNode.id;
+            var e = evt.target.id;
             //need to choose from player.
             document.querySelector('.mp4').src =series_src(s,e,'mp4');
             document.querySelector('.mkv').src =series_src(s,e,'mkv');
             document.querySelector('video').load();
             document.querySelector('video').play();
-
        }
     });
 
     var seasons_lis = document.querySelector('.seasons');
-        seasons_lis.addEventListener('click',e=>{
-            console.log(e.target.nodeName);
-            if(e.target.nodeName =='LI'){
-                var s=e.target.innerHTML.split(' ')[1];
+        seasons_lis.addEventListener('click',evt=>{
+            if(evt.target.nodeName =='LI'){
+                reset_selected_li(evt.target.parentNode);
+                select_li(evt.target);
+                var s=evt.target.innerHTML.split(' ')[1];
                 console.log(s);
                 update_episodes_block(Number(s));
             }
