@@ -1,7 +1,14 @@
 
-use_data('/get_series','#series',load_images);
-use_data('/get_movies','#movies',load_images);
+/*
+  This file contains all the communication with
+  the server.
+*/
 
+
+use_data('/get_series','#series',load_titles);
+use_data('/get_movies','#movies',load_titles);
+
+//request for JSON object in a given url and pass it into a given function.
 function use_data(url,id,func){
 
     var request = new XMLHttpRequest();
@@ -13,7 +20,8 @@ function use_data(url,id,func){
     request.send();
 }
 
-function load_images(obj,select){
+//loads the titles items from a Given JSON.
+function load_titles(obj,select){
     var block = document.querySelector(select);
     for(var i=0;i<obj.length;i++){
         var elem = document.createElement('img');
@@ -22,4 +30,3 @@ function load_images(obj,select){
         block.appendChild(elem);
     }
 }
-
