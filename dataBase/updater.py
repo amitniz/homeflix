@@ -36,12 +36,15 @@ for t in types:
 
                 sub_dirs = dict(zip(['src','location','genre','name','seasons','episodes'],
                     [src,LOCATION,g,name(item),len(seasons),episodes]))
-                if db.series.find({"name":item}).count()==0:
+                if db.series.find({"name":name(item)}).count()==0:
                     db.series.insert_one(sub_dirs)
-                    print "[+] Updated: ", sub_dirs
+                    print "[+] Inserted: ", sub_dirs
+                if db.series.find_one({"name":name(item)})['seasons']!=len(seasons):
+                    print "[+}Updated: ",sub_dirs
+                    db.series.update({"name":name(item)},sub_dirs)
             else:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
-                if db.movies.find({"name":item}).count()==0:
+                if db.movies.find({"name":name(item)}).count()==0:
                     db.movies.insert_one(sub_dirs)
                     print "[+] Updated: ", sub_dirs
 print "[+] Done.."
