@@ -69,7 +69,6 @@ p{
 }
 .episodes_block{
     float:left;
-    column-count: 2;
     margin:0;
     height:50%;
     width:60%;
@@ -77,6 +76,9 @@ p{
     border-left: rgba(200,30,30,0.1) solid 3px;
 }
 
+ui{
+   column-count: 2;
+}
 li{
     list-style:none;
     width:100%;

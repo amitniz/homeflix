@@ -109,3 +109,7 @@ function movie_src(json,ext){
 function series_src(json,season,episode,ext){
     return json.src+'/'+season+'/'+episode+'.'+ext;
 }
+
+function play_next(){
+  console.log('ended');
+}
