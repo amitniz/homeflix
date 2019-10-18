@@ -7,8 +7,8 @@
 //open the player panel.
 function open_panel(id,block){
     var player = block.querySelector('.player');
-    use_data('/q?type=movies&_id='+id,player,build_panel);
-    use_data('/q?type=series&_id='+id,player,build_panel);
+    fetch_data('/q?type=movies&_id='+id,player,build_panel);
+    fetch_data('/q?type=series&_id='+id,player,build_panel);
     window.panel_state= true;
 }
 //close the panel.

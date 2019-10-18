@@ -27,8 +27,7 @@ app.set('view engine','ejs')
 /* Handling requests */
 app.post('/q',function(req,res){
     var query = req.query
-    console.log(query)
-    console.log('[+]recieved query:'+query)
+    console.log('[+]request recieved: ',query)
     if(query.type == 'series'){
         delete query.type
         series_mod.find(query,function(err,doc){
@@ -49,25 +48,6 @@ app.post('/q',function(req,res){
         })
     }
 })
-
-app.post('/get_series',function(req,res){
-    series_mod.find(function(err,doc){
-        if(err){
-            console.log(err)
-        }else{
-            res.send(doc)
-        }
-    })});
-
-app.post('/get_movies',function(req,res){
-    movies_mod.find(function(err,doc){
-        if(err){
-            console.log(err)
-        }else{
-            res.send(doc)
-        }
-    })});
-
 
 app.get('/',function(req,res){
   res.render('index')

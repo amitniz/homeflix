@@ -1,10 +1,4 @@
 
-    var vids = document.querySelectorAll('video');
-    for(var i=0;i<vids.length;i++){
-      vids[i].addEventListener('ended',play_next());
-    }
-
-
 
     //close the video panel when clicked outside.
     document.addEventListener('click', evt=>{
