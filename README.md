@@ -1,13 +1,13 @@
 # HOMEFLIX
 HomeFlix - Local Streaming WebSite.
 
-## stack
+## Stack
 - NodeJS
 - MongoDB
 - Python
 - JavaScript
 
-## preview 
+## Preview 
 
 ![image of homeflix](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/homeflix.png)
 
