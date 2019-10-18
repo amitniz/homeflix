@@ -4,8 +4,8 @@
   <body>
                 <!---Logo-->
                 <div id="logo"><img src="img/logo.png"></div>
-                <%include partials/series%>
-                <%include partials/movies%>
+                <%- include("partials/block",{id:'series'})%>
+                <%- include("partials/block",{id:'movies'})%>
                 <script type="text/javascript" src="js/embedded.js"></script>
                 <script type="text/javascript" src="js/play.js"></script>
                 <script type="text/javascript" src="js/events.js"></script>
