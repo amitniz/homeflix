@@ -25,16 +25,17 @@ function close_panels(){
 //TODO: move the style parts into style.css
 function build_panel(obj,player){
     if(obj[0]){ //check if the request returned items.
+      const {name,genre,src,episodes,seasons} = obj[0];
         player.style.display ='flex';
-        player.querySelector('.title').innerHTML = obj[0].name;
-        player.querySelector('.description').innerHTML = 'Genre : ' +obj[0].genre
-        if(obj[0].seasons){
-            player.querySelector('.mkv').src =obj[0].src +'/s1/e1.mkv';
-            player.querySelector('.mp4').src =obj[0].src +'/s1/e1.mp4';
-            add_seasons(player);
+        player.querySelector('.title').innerHTML = name;
+        player.querySelector('.description').innerHTML = 'Genre : ' +genre
+        if(seasons){
+            player.querySelector('.mkv').src =src +'/s1/e1.mkv';
+            player.querySelector('.mp4').src =src +'/s1/e1.mp4';
+            add_seasons(player,seasons);
             player.querySelector('.episodes_block').innerHTML='';
-            for(var i=0;i<obj[0].seasons;i++){
-                add_episodes(player,i);
+            for(var i=0;i<seasons;i++){
+                add_episodes(player,i,episodes);
             }
         }else{
             player.querySelector('.mkv').src =movie_src(obj[0],'mp4');
@@ -48,10 +49,10 @@ function build_panel(obj,player){
 
 
 //create the seasons list items
-function add_seasons(player){
+function add_seasons(player,seasons){
     var seasons_list = player.querySelector('.seasons');
     seasons_list.innerHTML=''; //clear the previous list items.
-    for(var i=1;i<=obj[0].seasons;i++){
+    for(var i=1;i<=seasons;i++){
         var elem= document.createElement('li');
         elem.innerHTML= 'season '+i;
         seasons_list.appendChild(elem);
@@ -60,10 +61,10 @@ function add_seasons(player){
 }
 
 //create the episodes lists.
-function add_episodes(player,season){
+function add_episodes(player,season,episodes){
     var block = player.querySelector('.episodes_block');
     var episode_ui = document.createElement('ui');
-    for(var i=1;i<=obj[0].episodes[season];i++){
+    for(var i=1;i<=episodes[season];i++){
         var elem = document.createElement('li');
         elem.setAttribute('id','e'+i);
         elem.innerHTML ='episode '+i;
@@ -101,7 +102,7 @@ function update_episodes_block(s){
 
 //return the source of a movie.
 function movie_src(json,ext){
-    return json.src+'/'+json.name.replace(' ','_').toLowerCase()+'.'+ext;
+    return json.src+'/'+json.name.replace(/ /g,'_').toLowerCase()+'.'+ext;
 }
 
 //return the source of an episode.
