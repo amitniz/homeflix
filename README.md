@@ -12,6 +12,8 @@ HomeFlix - Local Streaming WebSite.
 ![image of homeflix](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/homeflix.png)
 
 
+![homeflix player](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/player.png)
+
 
 
 
