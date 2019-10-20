@@ -41,6 +41,7 @@ video{
     height:100%;
     z-index:0;
     position:absolute;
+    outline:none;
 }
 
 p{
@@ -49,7 +50,7 @@ p{
 
 .info{
     width:40%;
-    height:92%;
+    height:90%;
     background: linear-gradient(-90deg,rgba(0,0,0,0), rgba(35,5,0,0.6));
     position:relative;
     opacity:0;
@@ -117,13 +118,13 @@ h2{
   height:320px;
   display: flex;
   overflow-y: hidden;
+  scroll-behavior: [ auto | smooth ];
   overflow-x:scroll;
 }
 
 .Carousel img{
   height: 80%;
-  width: 200px;
-  position: relative;
+  width: 15%;
   border: 3px solid black;
   -webkit-transition: 0.2s ease-in-out;
   -moz-transition: 0.2s ease-in-out;
@@ -131,6 +132,41 @@ h2{
 
 section:nth-of-type(2){
   margin-top:1%;
+}
+
+.Arrow{
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  height: 340.6px;
+  width:70px;
+  position:absolute;
+  margin: 0;
+  z-index: 10;
+  text-align:center;
+  opacity: 0.6;
+}
+
+.Arrow:hover{
+  opacity:1;
+  scroll:
+}
+
+.right{
+  right:-6px;
+  background:linear-gradient(-90deg,black 35%,rgba(0,0,0,0));
+}
+
+.left{
+  left:-6px;
+  background:linear-gradient(90deg,black 35%,rgba(0,0,0,0));
+}
+
+a{
+  position: relative;
+  font-family: 'Nanum Gothic';
+  font-size: 5em;
+  top:33%;
+  opacity: 0.7;
 }
 
 .Genre{
@@ -141,7 +177,8 @@ section:nth-of-type(2){
 
 footer{
     color: rgb(70,70,70);
-    margin: 0 0 0 45%;
+    margin: 0 42% 0 42%;
+    text-align: center;
 }
 
 .hover_img{

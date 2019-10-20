@@ -3,6 +3,7 @@
 const data_location = '/Volumes/Elements/DB'
 
 /* Connecting to the DataBase */
+
 mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/homeFlix',{ useUnifiedTopology: true, useNewUrlParser: true })
 

@@ -5,15 +5,18 @@
 /*/
 
 //open the player panel.
-function open_panel(id,block){
-    var player = block.querySelector('.player');
-    fetch_data('/q?type=movies&_id='+id,player,build_panel);
-    fetch_data('/q?type=series&_id='+id,player,build_panel);
+function open_panel(id,type,block){
+    let player = block.querySelector('.player');
+    if(type == 'series'){
+      fetch_data('/q?type=series&_id='+id,player,build_panel);
+    }else{
+      fetch_data('/q?type=movies&_id='+id,player,build_panel);
+    }
     window.panel_state= true;
 }
 //close the panel.
 function close_panels(){
-    var players = document.querySelectorAll('.player');
+    let players = document.querySelectorAll('.player');
     for(var i=0;i< players.length;i++){
         players[i].style.display ='none';
         players[i].querySelector('video').pause(); //prevents from the video keep playing.
@@ -112,4 +115,15 @@ function series_src(json,season,episode,ext){
 
 function play_next(){
   console.log('ended');
+}
+
+
+function scroll_images(e){
+  let carousel=e.parentNode.querySelector('.Carousel');
+  if(e.className=='Arrow right'){
+    carousel.scrollBy({top:0,left:window.innerWidth,behavior:'smooth'});
+  }else{
+    console.log('scroll left');
+    carousel.scrollBy({top:0,left:-window.innerWidth,behavior:'smooth'});
+  }
 }

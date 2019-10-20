@@ -36,9 +36,17 @@
             }
         });
 
+    //Arrows
+    let arrows = document.querySelectorAll('.Arrow');
+    for(var i=0;i<arrows.length;i++){
+      arrows[i].addEventListener('mouseenter',function(){scroll_images(this)});
+      arrows[i].addEventListener('click',function(){scroll_images(this)});
+    }
+
     //Carousel imgs actions.
     var carousels = document.querySelectorAll('.Carousel');
     for(var i=0;i<carousels.length;i++){
+
       carousels[i].addEventListener('mouseover',evt =>{
           if(evt.target.className != "Carousel"){
               evt.target.classList.add('hover_img');
@@ -61,8 +69,9 @@
 
       carousels[i].addEventListener('click',evt=>{
           if(evt.target.className !="Carousel"){
+              let type = evt.target.src.includes('series') ? 'series' : 'movies';
               if(!window.panel_state){
-                 open_panel(evt.target.id,evt.target.parentNode.parentNode);
+                 open_panel(evt.target.id,type,evt.target.parentNode.parentNode);
               }else{
                   close_panels();
                   evt.target.scrollIntoView({ behavior: 'smooth', block: 'end' });
