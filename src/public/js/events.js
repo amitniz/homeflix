@@ -1,6 +1,8 @@
 
-    import {find_parent} from './etc.js'
+    import * as etc from './etc.js'
     import * as play from './play.js'
+
+
     //close the video panel when clicked outside.
     document.addEventListener('click', evt=>{
       if(evt.target.className=='Carousel'|| evt.target.className=='Genre'){
@@ -10,31 +12,30 @@
     })
 
     //episode button. //TODO: change into querySelectorAll
-    const episodes_block = document.querySelector('.episodes_block');
-    episodes_block.addEventListener('click',evt=>{
-        if(evt.target.nodeName == 'LI'){
-            play.select_li(evt.target);
-            let video_player = find_parent(evt.target,'player').querySelector('video');
-            console.log(video_player);
-            let season = evt.target.parentNode.id;
-            let episode = evt.target.id;
-            video_player.querySelector('.mp4').src = play.series_src(obj[0],season,episode,'mp4');
-            video_player.querySelector('.mkv').src = play.series_src(obj[0],season,episode,'mkv');
-            video_player.load();
-            video_player.play();
-       }
+    const episodes_block = document.querySelectorAll('.episodes_block');
+    for(var i=0;i<episodes_block.length;i++){
+      episodes_block[i].addEventListener('click',evt=>{
+          if(evt.target.nodeName == 'LI'){
+              play.select_li(evt.target);
+              let video_player = etc.find_parent(evt.target,'player').querySelector('video');
+              let season = evt.target.parentNode.id;
+              let episode = evt.target.id;
+              play.play_episode(video_player,season,episode);
+         }
     });
+    }
 
     //season button.
-    const seasons_lis = document.querySelector('.seasons');
-    seasons_lis.addEventListener('click',evt=>{
-        if(evt.target.nodeName =='LI'){
-            play.select_li(evt.target);
-            let season = evt.target.innerHTML.split(' ')[1];
-            play.update_episodes_block('s'+season);
-        }
-    });
-
+    const seasons_lis = document.querySelectorAll('.seasons');
+    for(var i=0;i<seasons_lis.length;i++){
+      seasons_lis[i].addEventListener('click',evt=>{
+          if(evt.target.nodeName =='LI'){
+              play.select_li(evt.target);
+              let season = evt.target.innerHTML.split(' ')[1];
+              play.update_episodes_block('s'+season);
+          }
+      });
+    }
     //Arrows
     const arrows = document.querySelectorAll('.Arrow');
     for(var i=0;i<arrows.length;i++){

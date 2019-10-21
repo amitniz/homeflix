@@ -5,6 +5,7 @@
 */
 
 
+
 fetch_data('/q?type=series','#series',load_titles);
 fetch_data('/q?type=movies','#movies',load_titles);
 
@@ -14,7 +15,7 @@ function fetch_data(url,id,func){
     var request = new XMLHttpRequest();
     request.open('POST',url);
     request.onload = function(){
-        obj=JSON.parse(request.responseText);
+        obj = JSON.parse(request.responseText);
         func(obj,id);
         }
     request.send();
@@ -22,22 +23,17 @@ function fetch_data(url,id,func){
 
 //loads the titles items from a Given JSON.
 function load_titles(obj,select){
-    let shuffled_obj = shuffle(obj);
     let block = document.querySelector(select);
-    for(var i=0;i<shuffled_obj.length;i++){
+    for(var i=0;i<obj.length;i++){
         var elem = document.createElement('img');
-        elem.setAttribute('src',shuffled_obj[i].src + '/cover.png');
-        elem.setAttribute('id',shuffled_obj[i]._id);
+        elem.setAttribute('src',obj[i].src + '/cover.png');
+        elem.setAttribute('id',obj[i]._id);
         block.appendChild(elem);
     }
+    shuffle_childs(block);
 }
 
-function shuffle(arr){
-  for(var i=0; i<arr.length;i++){
-    let rand = Math.random()*i|0;
-    temp = arr[i];
-    arr[i] = arr[rand];
-    arr[rand]=temp;
-  }
-  return arr;
+function shuffle_childs(element){
+  for(var i=element.children.length; i>=0;--i)
+    element.appendChild(element.children[Math.random()*i|0]);
 }

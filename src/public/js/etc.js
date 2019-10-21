@@ -7,6 +7,5 @@ export function find_parent(element,selector){
       if (element.className == selector) break;
       element = element.parentNode;
     }
-    console.log({found:element});
     return element;
 }

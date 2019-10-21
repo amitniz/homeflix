@@ -4,6 +4,8 @@
   This file contains the code for the player panel.
 /*/
 
+
+
 //open the player panel.
 export function open_panel(id,type,block){
     let player = block.querySelector('.player');
@@ -113,11 +115,11 @@ export function movie_src(json,ext){
 }
 
 //return the source of an episode.
-export function series_src(json,season,episode,ext){
+function series_src(json,season,episode,ext){
     return json.src+'/'+season+'/'+episode+'.'+ext;
 }
 
-export function play_next(){
+export function play_next(current_episode){
   console.log('ended');
 }
 
@@ -130,4 +132,12 @@ export function scroll_images(e){
     console.log('scroll left');
     carousel.scrollBy({top:0,left:-window.innerWidth,behavior:'smooth'});
   }
+}
+
+
+export function play_episode(player,season,episode){
+  player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
+  player.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
+  player.load();
+  player.play();
 }
