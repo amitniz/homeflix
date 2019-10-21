@@ -8,8 +8,8 @@ mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/homeFlix',{ useUnifiedTopology: true, useNewUrlParser: true })
 
 //schemes of the db collections.
-var series_scm = new mongoose.Schema({name:String,img:String,episodes:Array,location:String
-                                 ,genre:String,seasons:String})
+var series_scm = new mongoose.Schema({name:String,img:String,location:String
+                                 ,genre:String,seasons:Array})
 var movies_scm = new mongoose.Schema({name:String,img:String,location:String,genre:String})
 
 

@@ -30,16 +30,16 @@ for t in types:
             src = os.path.join(t,g,item)
             if t == 'series':
                 seasons = [s for s in scan_dir(os.path.join(LOCATION,src)) if os.path.isdir(os.path.join(LOCATION,src,s))]
-                episodes=[]
+                seasons_list=[]
                 for s in sorted(seasons):
-                    episodes.append(len([f for f in scan_dir(os.path.join(LOCATION,t,g,item,s))]))
+                    seasons_list.append([int(s.strip('s')),len([f for f in scan_dir(os.path.join(LOCATION,t,g,item,s))])])
 
-                sub_dirs = dict(zip(['src','location','genre','name','seasons','episodes'],
-                    [src,LOCATION,g,name(item),len(seasons),episodes]))
+                sub_dirs = dict(zip(['src','location','genre','name','seasons'],
+                    [src,LOCATION,g,name(item),seasons_list]))
                 if db.series.find({"name":name(item)}).count()==0:
                     db.series.insert_one(sub_dirs)
                     print "[+] Inserted: ", sub_dirs
-                if db.series.find_one({"name":name(item)})['seasons']!=len(seasons):
+                elif db.series.find_one({"name":name(item)})['seasons']!=seasons_list:
                     print "[+}Updated: ",sub_dirs
                     db.series.update({"name":name(item)},sub_dirs)
             else:

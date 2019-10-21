@@ -152,12 +152,12 @@ section:nth-of-type(2){
 }
 
 .right{
-  right:-6px;
+  right:-8px;
   background:linear-gradient(-90deg,black 35%,rgba(0,0,0,0));
 }
 
 .left{
-  left:-6px;
+  left:-8px;
   background:linear-gradient(90deg,black 35%,rgba(0,0,0,0));
 }
 

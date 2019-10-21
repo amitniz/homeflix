@@ -8,43 +8,43 @@
       }
     })
 
-    //episode button.
-    var episodes_block =document.querySelector('.episodes_block');
+    //episode button. //TODO: change into querySelectorAll
+    const episodes_block = document.querySelector('.episodes_block');
     episodes_block.addEventListener('click',evt=>{
-        if(evt.target.nodeName=='LI'){
+        if(evt.target.nodeName == 'LI'){
             reset_selected_li(evt.target.parentNode);
             select_li(evt.target);
-            var s = evt.target.parentNode.id;
-            var e = evt.target.id;
+            let video = document.querySelector('video');
+            let season = evt.target.parentNode.id;
+            let episode = evt.target.id;
             //need to choose from player.
-            document.querySelector('.mp4').src =series_src(obj[0],s,e,'mp4');
-            document.querySelector('.mkv').src =series_src(obj[0],s,e,'mkv');
-            document.querySelector('video').load();
-            document.querySelector('video').play();
+            document.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
+            document.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
+            video.load();
+            video.play();
        }
     });
 
     //season button.
-    var seasons_lis = document.querySelector('.seasons');
-        seasons_lis.addEventListener('click',evt=>{
-            if(evt.target.nodeName =='LI'){
-                reset_selected_li(evt.target.parentNode);
-                select_li(evt.target);
-                var s=evt.target.innerHTML.split(' ')[1];
-                console.log(s);
-                update_episodes_block(Number(s));
-            }
-        });
+    const seasons_lis = document.querySelector('.seasons');
+    seasons_lis.addEventListener('click',evt=>{
+        if(evt.target.nodeName =='LI'){
+            reset_selected_li(evt.target.parentNode);
+            select_li(evt.target);
+            let season = evt.target.innerHTML.split(' ')[1];
+            update_episodes_block('s'+season);
+        }
+    });
 
     //Arrows
-    let arrows = document.querySelectorAll('.Arrow');
+    const arrows = document.querySelectorAll('.Arrow');
     for(var i=0;i<arrows.length;i++){
       arrows[i].addEventListener('mouseenter',function(){scroll_images(this)});
       arrows[i].addEventListener('click',function(){scroll_images(this)});
     }
 
     //Carousel imgs actions.
-    var carousels = document.querySelectorAll('.Carousel');
+    const carousels = document.querySelectorAll('.Carousel');
     for(var i=0;i<carousels.length;i++){
 
       carousels[i].addEventListener('mouseover',evt =>{

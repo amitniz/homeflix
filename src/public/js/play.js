@@ -28,21 +28,22 @@ function close_panels(){
 //TODO: move the style parts into style.css
 function build_panel(obj,player){
     if(obj[0]){ //check if the request returned items.
-      const {name,genre,src,episodes,seasons} = obj[0];
+      let {name,genre,src,seasons} = obj[0];
         player.style.display ='flex';
         player.querySelector('.title').innerHTML = name;
-        player.querySelector('.description').innerHTML = 'Genre : ' +genre
+        player.querySelector('.description').innerHTML = 'Genre : ' + genre
         if(seasons){
-            player.querySelector('.mkv').src =src +'/s1/e1.mkv';
-            player.querySelector('.mp4').src =src +'/s1/e1.mp4';
+            player.querySelector('.mkv').src = src +'/s'+seasons[0][0]+'/e1.mkv';
+            player.querySelector('.mp4').src = src +'/s'+seasons[0][0]+'/e1.mp4';
             add_seasons(player,seasons);
             player.querySelector('.episodes_block').innerHTML='';
-            for(var i=0;i<seasons;i++){
-                add_episodes(player,i,episodes);
+            for(var i=0;i<seasons.length;i++){
+                add_episodes(player,seasons[i]);
             }
+            update_episodes_block('s'+seasons[0][0]);
         }else{
-            player.querySelector('.mkv').src =movie_src(obj[0],'mp4');
-            player.querySelector('.mp4').src =movie_src(obj[0],'mp4');
+            player.querySelector('.mkv').src = movie_src(obj[0],'mp4');
+            player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
         }
         player.scrollIntoView({ behavior: 'smooth', block: 'center' });
         player.querySelector('video').load();
@@ -55,29 +56,28 @@ function build_panel(obj,player){
 function add_seasons(player,seasons){
     var seasons_list = player.querySelector('.seasons');
     seasons_list.innerHTML=''; //clear the previous list items.
-    for(var i=1;i<=seasons;i++){
+    for(var i=0;i<seasons.length;i++){
         var elem= document.createElement('li');
-        elem.innerHTML= 'season '+i;
+        elem.innerHTML= 'Season '+seasons[i][0];
         seasons_list.appendChild(elem);
-        if(i==1) select_li(elem);
+        if(i==0) select_li(elem);
     }
 }
 
 //create the episodes lists.
-function add_episodes(player,season,episodes){
+function add_episodes(player,season){
     var block = player.querySelector('.episodes_block');
     var episode_ui = document.createElement('ui');
-    for(var i=1;i<=episodes[season];i++){
+    for(var i=1;i<=season[1];i++){
         var elem = document.createElement('li');
         elem.setAttribute('id','e'+i);
-        elem.innerHTML ='episode '+i;
-        episode_ui.setAttribute('id','s'+(season+1));
+        elem.innerHTML ='Episode '+i;
+        episode_ui.setAttribute('id','s'+season[0]);
         episode_ui.setAttribute('class','episodes');
         episode_ui.appendChild(elem);
         if(i==1) select_li(elem);
     }
     block.appendChild(episode_ui);
-    update_episodes_block(1);
 }
 
 //reset the selected button.
@@ -95,13 +95,17 @@ function select_li(li){
 }
 
 //show the requested episodes block.
-function update_episodes_block(s){
-    var episodes_uis = document.querySelectorAll('.episodes_block ui');
+function update_episodes_block(season){
+    let episodes_uis = document.querySelectorAll('.episodes_block ui');
+    let selected = 0;
     for(var i=0;i<episodes_uis.length;i++){
+        if(episodes_uis[i].id==season){
+          episodes_uis[i].style.display ='block';
+      }else{
         episodes_uis[i].style.display= 'none';
+      }
     }
-    episodes_uis[s-1].style.display ='block';
-}
+  }
 
 //return the source of a movie.
 function movie_src(json,ext){
