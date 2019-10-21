@@ -5,8 +5,6 @@
 */
 
 
-
-
 fetch_data('/q?type=series','#series',load_titles);
 fetch_data('/q?type=movies','#movies',load_titles);
 

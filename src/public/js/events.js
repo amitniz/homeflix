@@ -1,10 +1,10 @@
 
     import {find_parent} from './etc.js'
-
+    import * as play from './play.js'
     //close the video panel when clicked outside.
     document.addEventListener('click', evt=>{
       if(evt.target.className=='Carousel'|| evt.target.className=='Genre'){
-          close_panels();
+          play.close_panels();
           evt.target.parentNode.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     })
@@ -13,13 +13,13 @@
     const episodes_block = document.querySelector('.episodes_block');
     episodes_block.addEventListener('click',evt=>{
         if(evt.target.nodeName == 'LI'){
-            reset_selected_li(evt.target.parentNode);
-            select_li(evt.target);
-            let video_player = find_parent(evt.target,'video');
+            play.select_li(evt.target);
+            let video_player = find_parent(evt.target,'player').querySelector('video');
+            console.log(video_player);
             let season = evt.target.parentNode.id;
             let episode = evt.target.id;
-            video_player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
-            video_player.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
+            video_player.querySelector('.mp4').src = play.series_src(obj[0],season,episode,'mp4');
+            video_player.querySelector('.mkv').src = play.series_src(obj[0],season,episode,'mkv');
             video_player.load();
             video_player.play();
        }
@@ -29,18 +29,17 @@
     const seasons_lis = document.querySelector('.seasons');
     seasons_lis.addEventListener('click',evt=>{
         if(evt.target.nodeName =='LI'){
-            reset_selected_li(evt.target.parentNode);
-            select_li(evt.target);
+            play.select_li(evt.target);
             let season = evt.target.innerHTML.split(' ')[1];
-            update_episodes_block('s'+season);
+            play.update_episodes_block('s'+season);
         }
     });
 
     //Arrows
     const arrows = document.querySelectorAll('.Arrow');
     for(var i=0;i<arrows.length;i++){
-      arrows[i].addEventListener('mouseenter',function(){scroll_images(this)});
-      arrows[i].addEventListener('click',function(){scroll_images(this)});
+      arrows[i].addEventListener('mouseenter',function(){play.scroll_images(this)});
+      arrows[i].addEventListener('click',function(){play.scroll_images(this)});
     }
 
     //Carousel imgs actions.
@@ -71,9 +70,9 @@
           if(evt.target.className !="Carousel"){
               let type = evt.target.src.includes('series') ? 'series' : 'movies';
               if(!window.panel_state){
-                 open_panel(evt.target.id,type,evt.target.parentNode.parentNode);
+                 play.open_panel(evt.target.id,type,evt.target.parentNode.parentNode);
               }else{
-                  close_panels();
+                  play.close_panels();
                   evt.target.scrollIntoView({ behavior: 'smooth', block: 'end' });
               }
           }

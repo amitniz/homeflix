@@ -5,7 +5,7 @@
 /*/
 
 //open the player panel.
-function open_panel(id,type,block){
+export function open_panel(id,type,block){
     let player = block.querySelector('.player');
     if(type == 'series'){
       fetch_data('/q?type=series&_id='+id,player,build_panel);
@@ -15,7 +15,7 @@ function open_panel(id,type,block){
     window.panel_state= true;
 }
 //close the panel.
-function close_panels(){
+export function close_panels(){
     let players = document.querySelectorAll('.player');
     for(var i=0;i< players.length;i++){
         players[i].style.display ='none';
@@ -26,7 +26,7 @@ function close_panels(){
 
 //build the panel content.
 //TODO: move the style parts into style.css
-function build_panel(obj,player){
+export function build_panel(obj,player){
     if(obj[0]){ //check if the request returned items.
       let {name,genre,src,seasons} = obj[0];
         player.style.display ='flex';
@@ -89,13 +89,13 @@ function reset_selected_li(ui){
 }
 
 //select a button.
-function select_li(li){
+export function select_li(li){
     reset_selected_li(li.parentNode);
     li.classList.add('selected');
 }
 
 //show the requested episodes block.
-function update_episodes_block(season_id){
+export function update_episodes_block(season_id){
     let episodes_uis = document.querySelectorAll('.episodes_block ui');
     let selected = 0;
     for(var i=0;i<episodes_uis.length;i++){
@@ -108,21 +108,21 @@ function update_episodes_block(season_id){
   }
 
 //return the source of a movie.
-function movie_src(json,ext){
+export function movie_src(json,ext){
     return json.src+'/'+json.name.replace(/ /g,'_').toLowerCase()+'.'+ext;
 }
 
 //return the source of an episode.
-function series_src(json,season,episode,ext){
+export function series_src(json,season,episode,ext){
     return json.src+'/'+season+'/'+episode+'.'+ext;
 }
 
-function play_next(){
+export function play_next(){
   console.log('ended');
 }
 
 
-function scroll_images(e){
+export function scroll_images(e){
   let carousel=e.parentNode.querySelector('.Carousel');
   if(e.className=='Arrow right'){
     carousel.scrollBy({top:0,left:window.innerWidth,behavior:'smooth'});

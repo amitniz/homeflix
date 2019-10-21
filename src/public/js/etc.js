@@ -1,11 +1,12 @@
 
 
-
+//returns specific parent of an element.
 export function find_parent(element,selector){
     let parents =[];
     while(element.parentNode){
-      if (element.parentNode.tagName==selector) break;
+      if (element.className == selector) break;
       element = element.parentNode;
     }
+    console.log({found:element});
     return element;
 }
