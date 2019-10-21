@@ -95,11 +95,11 @@ function select_li(li){
 }
 
 //show the requested episodes block.
-function update_episodes_block(season){
+function update_episodes_block(season_id){
     let episodes_uis = document.querySelectorAll('.episodes_block ui');
     let selected = 0;
     for(var i=0;i<episodes_uis.length;i++){
-        if(episodes_uis[i].id==season){
+        if(episodes_uis[i].id==season_id){
           episodes_uis[i].style.display ='block';
       }else{
         episodes_uis[i].style.display= 'none';

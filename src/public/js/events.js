@@ -1,4 +1,5 @@
 
+    import {find_parent} from './etc.js'
 
     //close the video panel when clicked outside.
     document.addEventListener('click', evt=>{
@@ -14,14 +15,13 @@
         if(evt.target.nodeName == 'LI'){
             reset_selected_li(evt.target.parentNode);
             select_li(evt.target);
-            let video = document.querySelector('video');
+            let video_player = find_parent(evt.target,'video');
             let season = evt.target.parentNode.id;
             let episode = evt.target.id;
-            //need to choose from player.
-            document.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
-            document.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
-            video.load();
-            video.play();
+            video_player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
+            video_player.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
+            video_player.load();
+            video_player.play();
        }
     });
 
