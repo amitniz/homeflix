@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-import os
+import os,imdb
 
 LOCATION = '/Volumes/Elements/DB'
 DATABASE = 'homeFlix'
@@ -22,10 +22,11 @@ def scan_dir(path):
 def name(item):
     return item.replace('_',' ').title()
 
-print "----------------------------\n[+] Updating the database..\n----------------------------"
+print( "----------------------------\n[+] Updating the database..\n----------------------------")
 for t in types:
     for g in genres:
         item_list = scan_dir(os.path.join(LOCATION,t,g))
+        #debug
         for item in item_list:
             src = os.path.join(t,g,item)
             if t == 'series':
@@ -36,15 +37,15 @@ for t in types:
 
                 sub_dirs = dict(zip(['src','location','genre','name','seasons'],
                     [src,LOCATION,g,name(item),seasons_list]))
-                if db.series.find({"name":name(item)}).count()==0:
+                if db.series.count_documents({"name":name(item)})==0:
                     db.series.insert_one(sub_dirs)
-                    print "[+] Inserted: ", sub_dirs
+                    print( "[+] Inserted: ", sub_dirs)
                 elif db.series.find_one({"name":name(item)})['seasons']!=seasons_list:
-                    print "[+}Updated: ",sub_dirs
-                    db.series.update({"name":name(item)},sub_dirs)
+                    print( "[+}Updated: ",sub_dirs)
+                    db.series.update_one({"name":name(item)},sub_dirs)
             else:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
-                if db.movies.find({"name":name(item)}).count()==0:
+                if db.movies.count_documents({"name":name(item)})==0:
                     db.movies.insert_one(sub_dirs)
-                    print "[+] Updated: ", sub_dirs
-print "[+] Done.."
+                    print( "[+] Updated: ", sub_dirs)
+print( "[+] Done..")

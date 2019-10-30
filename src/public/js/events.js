@@ -3,6 +3,8 @@
     import * as play from './play.js'
 
 
+/******************************** Events *************************************/
+
     //close the video panel when clicked outside.
     document.addEventListener('click', evt=>{
       if(evt.target.className=='Carousel'|| evt.target.className=='Genre'){
@@ -11,7 +13,7 @@
       }
     })
 
-    //episode button. //TODO: change into querySelectorAll
+    //episode button.
     const episodes_block = document.querySelectorAll('.episodes_block');
     for(var i=0;i<episodes_block.length;i++){
       episodes_block[i].addEventListener('click',evt=>{
@@ -49,7 +51,7 @@
 
       carousels[i].addEventListener('mouseover',evt =>{
           if(evt.target.className != "Carousel"){
-              evt.target.classList.add('hover_img');
+              //evt.target.classList.add('hover_img');
               for(var j=0;j<evt.target.parentNode.childNodes.length;j++){
                 if(evt.target.parentNode.childNodes[j]!=evt.target){
                   evt.target.parentNode.childNodes[j].style.opacity = 0.28;
@@ -60,7 +62,7 @@
 
       carousels[i].addEventListener('mouseout',evt=>{
           if(evt.target.className != "Carousel"){
-            evt.target.classList.remove('hover_img');
+            //evt.target.classList.remove('hover_img');
             for(var j=0;j<evt.target.parentNode.childNodes.length;j++){
               evt.target.parentNode.childNodes[j].style.opacity = 1;
             }

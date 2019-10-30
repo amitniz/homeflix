@@ -4,8 +4,6 @@
   This file contains the code for the player panel.
 /*/
 
-
-
 //open the player panel.
 export function open_panel(id,type,block){
     let player = block.querySelector('.player');
@@ -35,6 +33,8 @@ export function build_panel(obj,player){
         player.querySelector('.title').innerHTML = name;
         player.querySelector('.description').innerHTML = 'Genre : ' + genre
         if(seasons){
+            player.querySelector('video').setAttribute('onended',console.log('shit'));
+            console.log(player.querySelector('video'))
             player.querySelector('.mkv').src = src +'/s'+seasons[0][0]+'/e1.mkv';
             player.querySelector('.mp4').src = src +'/s'+seasons[0][0]+'/e1.mp4';
             add_seasons(player,seasons);
@@ -110,7 +110,7 @@ export function update_episodes_block(season_id){
   }
 
 //return the source of a movie.
-export function movie_src(json,ext){
+function movie_src(json,ext){
     return json.src+'/'+json.name.replace(/ /g,'_').toLowerCase()+'.'+ext;
 }
 
@@ -119,7 +119,13 @@ function series_src(json,season,episode,ext){
     return json.src+'/'+season+'/'+episode+'.'+ext;
 }
 
-export function play_next(current_episode){
+export function play_next(player){
+  let current_pos = get_current_episode(player);
+  //get num of episode for given season.
+  //if has anothe episode
+  //elif end of season but not the last.
+  //remember to update the selected season and episode!
+
   console.log('ended');
 }
 
@@ -136,8 +142,15 @@ export function scroll_images(e){
 
 
 export function play_episode(player,season,episode){
+  //TODO: replace the global variables.
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
   player.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
   player.load();
   player.play();
+}
+
+function get_current_episode(vid){
+  //TODO: beautify
+  let extract = vid.querySelector('source').src.match(/[se][1-9]/g);
+  return {season:extract[0], episode:extract[1]};
 }
