@@ -1,0 +1,35 @@
+version: '3'
+services:
+    
+    python:
+        container_name: python
+        build: 
+            context: ..
+            dockerfile: ./docker/Dockerfile.python
+        env_file:
+            - ../dataBase/IMDB_KEY.env
+        links:
+            - mongo
+        volumes:
+            - /Volumes/Elements/DB:/Volumes/Elements/DB
+
+    app:
+        container_name: express
+        restart: always
+        build: 
+            context: .. 
+            dockerfile: ./docker/Dockerfile.express
+        ports:
+            - '80:80'
+        links:
+            - mongo
+        volumes:
+            - /Volumes/Elements/DB:/Volumes/Elements/DB
+    
+    mongo:
+        container_name: mongo
+        image: mongo:4.2
+        ports:
+            - '27017:27017'
+
+

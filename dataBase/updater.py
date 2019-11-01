@@ -3,7 +3,7 @@ import os,imdb
 
 LOCATION = '/Volumes/Elements/DB'
 DATABASE = 'homeFlix'
-HOST = 'localhost'
+HOST = 'mongo'
 PORT = 27017
 
 client = MongoClient(HOST,PORT)

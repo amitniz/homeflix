@@ -1,0 +1,10 @@
+FROM python:3.8
+
+WORKDIR /usr/local/homeflix
+
+COPY ./dataBase ./
+
+RUN pip3 install pymongo requests
+
+CMD python3 updater.py
+
