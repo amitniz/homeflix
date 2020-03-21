@@ -33,7 +33,6 @@ export function build_panel(obj,player){
         player.querySelector('.title').innerHTML = name;
         player.querySelector('.description').innerHTML = 'Genre : ' + genre
         if(seasons){
-            player.querySelector('.mp4').src = src +'/s'+seasons[0][0]+'/e1.mp4';
             add_seasons(player,seasons);
             player.querySelector('.episodes_block').innerHTML='';
 
@@ -47,13 +46,13 @@ export function build_panel(obj,player){
             let episodes = player.querySelector('.episodes_block ui');
             select_li(seasons_list.children[0]);
             select_li(episodes.children[0]);
-
+            play_episode(player.querySelector('video'),'s'+seasons[0][0],'e1');
         }else{
             player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
+            player.querySelector('video').load();
+            player.querySelector('video').play();
         }
         player.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        player.querySelector('video').load();
-        player.querySelector('video').play();
     }
 }
 
