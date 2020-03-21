@@ -1,5 +1,5 @@
 /*
-  This file contains the code for the player panel.
+  This file contains the code for the Video Player.
 /*/
 
 import * as memory from './memory.js'
@@ -12,8 +12,9 @@ export function open_panel(id,type,block){
     }else{
       fetch_data('/q?type=movies&_id='+id,player,build_panel);
     }
-    window.panel_state= true;
+    window.panel_statei = true;
 }
+
 //close the panel.
 export function close_panels(){
     let players = document.querySelectorAll('.player');
@@ -130,6 +131,10 @@ function movie_src(json,ext){
     return json.src+'/'+json.name.replace(/ /g,'_').toLowerCase()+'.'+ext;
 }
 
+//return thei subtitles source of an episode.
+function subs_src(json,season,episode,ext){
+    return json.src+'/'+season+'/subs/'+episode+'.'+ext;
+}
 //return the source of an episode.
 function series_src(json,season,episode,ext){
     return json.src+'/'+season+'/'+episode+'.'+ext;
@@ -159,6 +164,7 @@ export function scroll_images(e){
 export function play_episode(player,season,episode){
   //TODO: replace the global variables.
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
+  player.querySelector('.subs').src =subs_src(obj[0],season,episode,'vvt');
   player.load();
   player.play();
 }
