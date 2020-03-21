@@ -1,8 +1,8 @@
-
-
 /*
   This file contains the code for the player panel.
 /*/
+
+import * as memory from './memory.js'
 
 //open the player panel.
 export function open_panel(id,type,block){
@@ -44,9 +44,17 @@ export function build_panel(obj,player){
             //Select the current season and episode.
             let seasons_list = player.querySelector('.seasons');
             let episodes = player.querySelector('.episodes_block ui');
-            select_li(seasons_list.children[0]);
-            select_li(episodes.children[0]);
-            play_episode(player.querySelector('video'),'s'+seasons[0][0],'e1');
+            console.log(seasons_list)
+            if(memory.get_location(name)){
+                let loc = memory.get_location(name);
+                play_episode(player.querySelector('video'),loc.season,loc.episode);
+                select_li(seasons_list.querySelector('#'+loc.season));
+                select_li(episodes.querySelector('#'+loc.episode))
+            }else{
+                play_episode(player.querySelector('video'),'s'+seasons[0][0],'e1');
+                select_li(seasons_list.children[0]);
+                select_li(episodes.children[0]);
+            }
         }else{
             player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
             player.querySelector('video').load();
@@ -64,6 +72,7 @@ function add_seasons(player,seasons){
     for(var i=0;i<seasons.length;i++){
         var elem= document.createElement('li');
         elem.innerHTML= 'Season '+seasons[i][0];
+        elem.setAttribute('id','s'+seasons[i][0]);
         seasons_list.appendChild(elem);
     }
 }

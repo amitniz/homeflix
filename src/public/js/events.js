@@ -1,7 +1,7 @@
 
     import * as etc from './etc.js'
     import * as play from './play.js'
-
+    import * as memory from './memory.js'
 
 /******************************** Events *************************************/
 
@@ -23,6 +23,7 @@
               let season = evt.target.parentNode.id;
               let episode = evt.target.id;
               play.play_episode(video_player,season,episode);
+              memory.set_location(obj[0].name,season,episode);
          }
     });
     }
