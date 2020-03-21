@@ -6,8 +6,6 @@ services:
         build: 
             context: ..
             dockerfile: ./docker/Dockerfile.python
-        env_file:
-            - ../dataBase/IMDB_KEY.env
         links:
             - mongo
         volumes:
@@ -25,7 +23,7 @@ services:
             - mongo
         volumes:
             - /Volumes/Elements/DB:/Volumes/Elements/DB
-    
+            - ../src:/var/homeflix
     mongo:
         container_name: mongo
         image: mongo:4.2

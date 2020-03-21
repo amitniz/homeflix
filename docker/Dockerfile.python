@@ -6,5 +6,5 @@ COPY ./dataBase ./
 
 RUN pip3 install pymongo requests
 
-CMD python3 updater.py
+CMD python3 updater.py /Volumes/Elements/DB
 

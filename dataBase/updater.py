@@ -1,7 +1,7 @@
+import os,sys
 from pymongo import MongoClient
-import os,imdb
 
-LOCATION = '/Volumes/Elements/DB'
+LOCATION = sys.argv[1] if len(sys.argv) == 2 else '/Volumes/Elements/DB'
 DATABASE = 'homeFlix'
 HOST = 'mongo'
 PORT = 27017

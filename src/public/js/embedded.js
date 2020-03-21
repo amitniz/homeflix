@@ -9,6 +9,7 @@
 fetch_data('/q?type=series','#series',load_titles);
 fetch_data('/q?type=movies','#movies',load_titles);
 
+
 //request for JSON object in a given url and pass it into a given function.
 function fetch_data(url,id,func){
 
@@ -37,3 +38,4 @@ function shuffle_childs(element){
   for(var i=element.children.length; i>=0;--i)
     element.appendChild(element.children[Math.random()*i|0]);
 }
+

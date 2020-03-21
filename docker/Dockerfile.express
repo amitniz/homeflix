@@ -1,8 +1,10 @@
 FROM node:13 
 
-WORKDIR /usr/local/homeflix/src
+#WORKDIR /usr/local/homeflix/src
 
-COPY ./src ./
+WORKDIR /var/homeflix
+
+#COPY ./src ./
 
 COPY ./package*.json ../
 

@@ -33,18 +33,22 @@ export function build_panel(obj,player){
         player.querySelector('.title').innerHTML = name;
         player.querySelector('.description').innerHTML = 'Genre : ' + genre
         if(seasons){
-            player.querySelector('video').setAttribute('onended',console.log('shit'));
-            console.log(player.querySelector('video'))
-            player.querySelector('.mkv').src = src +'/s'+seasons[0][0]+'/e1.mkv';
             player.querySelector('.mp4').src = src +'/s'+seasons[0][0]+'/e1.mp4';
             add_seasons(player,seasons);
             player.querySelector('.episodes_block').innerHTML='';
+
             for(var i=0;i<seasons.length;i++){
                 add_episodes(player,seasons[i]);
             }
             update_episodes_block('s'+seasons[0][0]);
+            
+            //Select the current season and episode.
+            let seasons_list = player.querySelector('.seasons');
+            let episodes = player.querySelector('.episodes_block ui');
+            select_li(seasons_list.children[0]);
+            select_li(episodes.children[0]);
+
         }else{
-            player.querySelector('.mkv').src = movie_src(obj[0],'mp4');
             player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
         }
         player.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -62,12 +66,11 @@ function add_seasons(player,seasons){
         var elem= document.createElement('li');
         elem.innerHTML= 'Season '+seasons[i][0];
         seasons_list.appendChild(elem);
-        if(i==0) select_li(elem);
     }
 }
 
 //create the episodes lists.
-function add_episodes(player,season){
+function add_episodes(player,season,first_season=false){
     var block = player.querySelector('.episodes_block');
     var episode_ui = document.createElement('ui');
     for(var i=1;i<=season[1];i++){
@@ -77,7 +80,6 @@ function add_episodes(player,season){
         episode_ui.setAttribute('id','s'+season[0]);
         episode_ui.setAttribute('class','episodes');
         episode_ui.appendChild(elem);
-        if(i==1) select_li(elem);
     }
     block.appendChild(episode_ui);
 }
@@ -92,6 +94,12 @@ function reset_selected_li(ui){
 
 //select a button.
 export function select_li(li){
+    let episodes_uis = document.querySelectorAll('.episodes_block ui');
+    if(li.textContent.includes('Episode')){
+        for(var i=0;i<episodes_uis.length;i++){
+            reset_selected_li(episodes_uis[i]);
+        }
+    }
     reset_selected_li(li.parentNode);
     li.classList.add('selected');
 }
@@ -135,7 +143,6 @@ export function scroll_images(e){
   if(e.className=='Arrow right'){
     carousel.scrollBy({top:0,left:window.innerWidth,behavior:'smooth'});
   }else{
-    console.log('scroll left');
     carousel.scrollBy({top:0,left:-window.innerWidth,behavior:'smooth'});
   }
 }
@@ -144,7 +151,6 @@ export function scroll_images(e){
 export function play_episode(player,season,episode){
   //TODO: replace the global variables.
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
-  player.querySelector('.mkv').src = series_src(obj[0],season,episode,'mkv');
   player.load();
   player.play();
 }
