@@ -132,8 +132,8 @@ function movie_src(json,ext){
 }
 
 //return thei subtitles source of an episode.
-function subs_src(json,season,episode,ext){
-    return json.src+'/'+season+'/subs/'+episode+'.'+ext;
+function subs_src(json,season,episode,lang){
+    return json.src+'/'+season+'/subs/'+lang+'/'+episode+'.vtt';
 }
 //return the source of an episode.
 function series_src(json,season,episode,ext){
@@ -164,7 +164,8 @@ export function scroll_images(e){
 export function play_episode(player,season,episode){
   //TODO: replace the global variables.
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
-  player.querySelector('.subs').src =subs_src(obj[0],season,episode,'vvt');
+  player.querySelectorAll('.subs')[0].src =subs_src(obj[0],season,episode,'eng');
+  player.querySelectorAll('.subs')[1].src =subs_src(obj[0],season,episode,'heb');
   player.load();
   player.play();
 }

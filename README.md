@@ -21,12 +21,16 @@ HomeFlix - Local Streaming WebSite.
 
 - [ ] Add Autoplay feature.
 
+- [ ] Add an Upload feature.
+
+- [ ] Subtitles.
+
+- [ ] Build a custom Player.
+
 - [ ] Connect to imdb api.
 
 - [ ] Add search feature.
 
 - [ ] Add users feature.
-
-- [ ] Add personal user's progress tracking.
 
 - [ ] Add Shuffle feature.
