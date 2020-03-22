@@ -15,7 +15,7 @@ genres = ['action','comedy','thriller','drama','adventure']
 #scans the directory without hidden files.
 def scan_dir(path):
     for file in os.listdir(path):
-        if not file.startswith('.'):
+        if not file.startswith('.') and file != 'subs':
             yield file
 
 #creates name from the directory name.
