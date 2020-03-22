@@ -63,7 +63,7 @@ export function build_panel(obj,player){
             }else{
                 play_episode(player.querySelector('video'),'s'+seasons[0][0],'e1');
                 select_li(seasons_list.children[0]);
-                select_li(episodes.children[0]);
+                select_li(episodes_blocks[0].children[0]);
             }
 
         //Movies
