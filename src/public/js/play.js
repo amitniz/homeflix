@@ -40,22 +40,33 @@ export function build_panel(obj,player){
             for(var i=0;i<seasons.length;i++){
                 add_episodes(player,seasons[i]);
             }
-            update_episodes_block('s'+seasons[0][0]);
-            
+            let saved_loc = memory.get_location(name);
+            if(saved_loc){
+                update_episodes_block(saved_loc.season);
+            }else{
+                update_episodes_block('s'+seasons[0][0]);
+            }
             //Select the current season and episode.
             let seasons_list = player.querySelector('.seasons');
-            let episodes = player.querySelector('.episodes_block ui');
-            console.log(seasons_list)
-            if(memory.get_location(name)){
-                let loc = memory.get_location(name);
-                play_episode(player.querySelector('video'),loc.season,loc.episode);
-                select_li(seasons_list.querySelector('#'+loc.season));
-                select_li(episodes.querySelector('#'+loc.episode))
+            let episodes_blocks = player.querySelectorAll('.episodes_block ui');
+            if(saved_loc){
+                play_episode(player.querySelector('video'),saved_loc.season,
+                                                           saved_loc.episode);
+                select_li(seasons_list.querySelector('#'+saved_loc.season));
+                //find the season's block
+                for(let i=0;i<episodes_blocks.length;i++){
+                    if(episodes_blocks[i].id == saved_loc.season){
+                        select_li(episodes_blocks[i].querySelector(
+                                                       '#'+saved_loc.episode))
+                    }
+                }
             }else{
                 play_episode(player.querySelector('video'),'s'+seasons[0][0],'e1');
                 select_li(seasons_list.children[0]);
                 select_li(episodes.children[0]);
             }
+
+        //Movies
         }else{
             player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
             player.querySelector('video').load();
