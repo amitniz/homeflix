@@ -51,7 +51,8 @@ export function build_panel(obj,player){
             let episodes_blocks = player.querySelectorAll('.episodes_block ui');
             if(saved_loc){
                 play_episode(player.querySelector('video'),saved_loc.season,
-                                                           saved_loc.episode);
+                                                           saved_loc.episode,
+                                                           saved_loc.time);
                 select_li(seasons_list.querySelector('#'+saved_loc.season));
                 //find the season's block
                 for(let i=0;i<episodes_blocks.length;i++){
@@ -172,12 +173,13 @@ export function scroll_images(e){
 }
 
 
-export function play_episode(player,season,episode){
+export function play_episode(player,season,episode,time=0){
   //TODO: replace the global variables.
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
   player.querySelectorAll('.subs')[0].src =subs_src(obj[0],season,episode,'eng');
   player.querySelectorAll('.subs')[1].src =subs_src(obj[0],season,episode,'heb');
   player.load();
+  player.currentTime = time;
   player.play();
 }
 

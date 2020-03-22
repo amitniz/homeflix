@@ -27,6 +27,21 @@
          }
     });
     }
+    
+
+    //save current video time
+    const video_players = document.querySelectorAll('video');
+    for(var i = 0;i<video_players.length;i++){
+        video_players[i].addEventListener('pause',evt=>{
+            let saved_loc = memory.get_location(obj[0].name);
+            if(saved_loc){
+                memory.set_location(obj[0].name,saved_loc.season,
+                                    saved_loc.episode,
+                                    evt.target.currentTime);
+            }
+        });
+    }
+
 
     //season button.
     const seasons_lis = document.querySelectorAll('.seasons');
