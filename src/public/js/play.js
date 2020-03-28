@@ -70,6 +70,9 @@ export function build_panel(obj,player){
         //Movies
         }else{
             player.querySelector('.mp4').src = movie_src(obj[0],'mp4');
+			player.querySelectorAll('.subs')[0].src = movie_subs_src(obj[0],'eng');
+			player.querySelectorAll('.subs')[1].src = movie_subs_src(obj[0],'heb');
+
             player.querySelector('video').load();
             player.querySelector('video').play();
         }
@@ -143,9 +146,14 @@ function movie_src(json,ext){
     return json.src+'/'+json.name.replace(/ /g,'_').toLowerCase()+'.'+ext;
 }
 
-//return thei subtitles source of an episode.
+//return the subtitles source of an episode.
 function subs_src(json,season,episode,lang){
     return json.src+'/'+season+'/subs/'+lang+'/'+episode+'.vtt';
+}
+
+//subs_src for movies TODO:merge 
+function movie_subs_src(json,lang){
+	return json.src+'/subs/'+lang+'/'+json.name.toLowerCase()+'.vtt'; 
 }
 //return the source of an episode.
 function series_src(json,season,episode,ext){
