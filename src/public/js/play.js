@@ -153,7 +153,7 @@ function subs_src(json,season,episode,lang){
 
 //subs_src for movies TODO:merge 
 function movie_subs_src(json,lang){
-	return json.src+'/subs/'+lang+'/'+json.name.toLowerCase()+'.vtt'; 
+	return json.src+'/subs/'+lang+'/'+json.name.toLowerCase().replace(' ','_')+'.vtt'; 
 }
 //return the source of an episode.
 function series_src(json,season,episode,ext){
