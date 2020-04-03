@@ -53,5 +53,5 @@ for t in types:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
                 if db.movies.count_documents({"name":name(item)})==0:
                     db.movies.insert_one(sub_dirs)
-                    print( "[+] Updated: ", sub_dirs)
-print( "[+] Done..")
+                    print( "[+] Updated: ", name(item))
+print( "Done..")
