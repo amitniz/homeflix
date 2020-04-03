@@ -1,32 +1,38 @@
 import os,sys
 from pymongo import MongoClient
 
-LOCATION = sys.argv[1] if len(sys.argv) == 2 else '/Volumes/Elements/DB'
+LOCATION = sys.argv[2] if len(sys.argv) == 3 else '/Volumes/Elements/DB'
 DATABASE = 'homeFlix'
-HOST = 'mongo'
+HOST = sys.argv[1] if len(sys.argv) >= 2 else 'mongo'
 PORT = 27017
 
-client = MongoClient(HOST,PORT)
-db = client[DATABASE]
+client = MongoClient(HOST,PORT,serverSelectionTimeoutMS=10)
 
+#Check Connection
+try:
+	client.server_info()
+except:
+	print('[!] Failed to Connect..')
+	exit(1)
+
+db = client[DATABASE]
 types = ['movies','series']
 genres = ['action','comedy','thriller','drama','adventure']
 
-#scans the directory without hidden files.
+#scan the directory without hidden files.
 def scan_dir(path):
     for file in os.listdir(path):
         if not file.startswith('.') and file != 'subs':
             yield file
 
-#creates name from the directory name.
+#create name from the directory name.
 def name(item):
     return item.replace('_',' ').title()
 
-print( "----------------------------\n[+] Updating the database..\n----------------------------")
+print( f"{'-'*30}\n[+] Updating the database..\n{'-'*30}")
 for t in types:
     for g in genres:
         item_list = scan_dir(os.path.join(LOCATION,t,g))
-        #debug
         for item in item_list:
             src = os.path.join(t,g,item)
             if t == 'series':
@@ -42,7 +48,7 @@ for t in types:
                     print( "[+] Inserted: ", sub_dirs)
                 elif db.series.find_one({"name":name(item)})['seasons']!=seasons_list:
                     print( "[+}Updated: ",sub_dirs)
-                    db.series.update_one({"name":name(item)},sub_dirs)
+                    db.series.update_one({"name":name(item)},{'$set':sub_dirs})
             else:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
                 if db.movies.count_documents({"name":name(item)})==0:
