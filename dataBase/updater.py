@@ -45,13 +45,13 @@ for t in types:
                     [src,LOCATION,g,name(item),seasons_list]))
                 if db.series.count_documents({"name":name(item)})==0:
                     db.series.insert_one(sub_dirs)
-                    print( "[+] Inserted: ", sub_dirs)
+                    print( "[+] Inserted: ", name(item))
                 elif db.series.find_one({"name":name(item)})['seasons']!=seasons_list:
-                    print( "[+}Updated: ",sub_dirs)
+                    print( "[+}Updated: ",name(item))
                     db.series.update_one({"name":name(item)},{'$set':sub_dirs})
             else:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
                 if db.movies.count_documents({"name":name(item)})==0:
                     db.movies.insert_one(sub_dirs)
-                    print( "[+] Updated: ", name(item))
+                    print( "[+] Inserted: ", name(item))
 print( "Done..")
