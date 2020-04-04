@@ -1,3 +1,6 @@
+:root{
+	--overall-padding: 0 5%;
+}
 *{
   margin:0;
   padding: 0;
@@ -11,6 +14,7 @@
 
 body{
   background-color: black;
+  padding: var(--overall-padding);
   color: white;
 }
 
@@ -149,13 +153,14 @@ section:nth-of-type(2){
 .Arrow{
   -webkit-transition: 0.2s ease-in-out;
   -moz-transition: 0.2s ease-in-out;
+  padding: var(--overall-padding);
   height: 400px;
   width:70px;
   position:absolute;
   margin: 0;
   z-index: 10;
   text-align:center;
-  opacity: 0.6;
+  opacity: 0.9;
 }
 
 .Arrow:hover{
