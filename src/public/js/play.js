@@ -173,10 +173,11 @@ export function play_next(player){
 
 export function scroll_images(e){
   let carousel=e.parentNode.querySelector('.Carousel');
+  let scroll_value = carousel.offsetWidth *0.92;
   if(e.className=='Arrow right'){
-    carousel.scrollBy({top:0,left:window.innerWidth,behavior:'smooth'});
+    carousel.scrollBy({top:0,left:scroll_value,behavior:'smooth'});
   }else{
-    carousel.scrollBy({top:0,left:-window.innerWidth,behavior:'smooth'});
+    carousel.scrollBy({top:0,left:-scroll_value,behavior:'smooth'});
   }
 }
 
