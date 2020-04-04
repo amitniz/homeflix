@@ -23,8 +23,6 @@ HomeFlix - Local Streaming WebSite.
 
 - [ ] Add an Upload feature.
 
-- [ ] Subtitles.
-
 - [ ] Build a custom Player.
 
 - [ ] Connect to imdb api.
