@@ -7,7 +7,12 @@
 
 
 fetch_data('/q?type=series','#series',load_titles);
-fetch_data('/q?type=movies','#movies',load_titles);
+fetch_data('/q?type=movies&genre=drama','#Drama_or_Adventure_Movies',load_titles);
+fetch_data('/q?type=movies&genre=adventure','#Drama_or_Adventure_Movies',load_titles);
+fetch_data('/q?type=movies&genre=action','#action_or_Thriller_Movies',load_titles);
+fetch_data('/q?type=movies&genre=thriller','#action_or_Thriller_Movies',load_titles);
+fetch_data('/q?type=movies&genre=family','#Family_Movies',load_titles);
+fetch_data('/q?type=movies','#all_Movies',load_titles);
 
 
 //request for JSON object in a given url and pass it into a given function.
