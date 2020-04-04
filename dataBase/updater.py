@@ -17,7 +17,7 @@ except:
 
 db = client[DATABASE]
 types = ['movies','series']
-genres = ['action','comedy','thriller','drama','adventure']
+genres = ['action','comedy','thriller','drama','adventure','family']
 
 #scan the directory without hidden files.
 def scan_dir(path):

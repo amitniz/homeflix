@@ -153,7 +153,7 @@ function subs_src(json,season,episode,lang){
 
 //subs_src for movies TODO:merge 
 function movie_subs_src(json,lang){
-	return json.src+'/subs/'+lang+'/'+json.name.toLowerCase().replace(' ','_')+'.vtt'; 
+	return json.src+'/subs/'+lang+'/'+json.name.toLowerCase().replace(/ /g,'_')+'.vtt'; 
 }
 //return the source of an episode.
 function series_src(json,season,episode,ext){
@@ -173,7 +173,7 @@ export function play_next(player){
 
 export function scroll_images(e){
   let carousel=e.parentNode.querySelector('.Carousel');
-  let scroll_value = carousel.offsetWidth *0.92;
+  let scroll_value = carousel.offsetWidth *1;
   if(e.className=='Arrow right'){
     carousel.scrollBy({top:0,left:scroll_value,behavior:'smooth'});
   }else{
