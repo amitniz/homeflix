@@ -40,6 +40,10 @@
                                     evt.target.currentTime);
             }
         });
+		//prevent right click on video
+		video_players[i].addEventListener('contextmenu', e => {
+  			e.preventDefault();
+		});
     }
 
 
