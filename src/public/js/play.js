@@ -161,13 +161,22 @@ function series_src(json,season,episode,ext){
 }
 
 export function play_next(player){
-  let current_pos = get_current_episode(player);
+  let pos = get_current_episode(player);
   //get num of episode for given season.
-  //if has anothe episode
-  //elif end of season but not the last.
-  //remember to update the selected season and episode!
-
   console.log('ended');
+  obj[0].seasons.forEach(e=>{
+	  if(e[0] == pos.season && e[1] > pos.episode){
+		  let season = 's'+pos.season;
+		  let episode = 'e' + String(Number(pos.episode)+1);
+		  play_episode(player,season,episode);
+		  memory.set_location(obj[0].name,season,episode);
+	  }else if(e[0] ==String(Number(pos.season)+1)){
+		  let season = 's'+String(Number(pos.season)+1);
+		  let episode ='e1'
+		  play_episode(player,season,episode);
+		  memory.set_location(obj[0].name,season,episode);
+	  }
+  })
 }
 
 
@@ -190,10 +199,12 @@ export function play_episode(player,season,episode,time=0){
   player.load();
   player.currentTime = time;
   player.play();
+  //auto play
+  player.onended = function(){play_next(player)};
 }
 
 function get_current_episode(vid){
   //TODO: beautify
-  let extract = vid.querySelector('source').src.match(/[se][1-9]/g);
+  let extract = vid.querySelector('source').src.match(/[1-9]/g);
   return {season:extract[0], episode:extract[1]};
 }
