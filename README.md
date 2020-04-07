@@ -19,10 +19,6 @@ HomeFlix - Local Streaming WebSite.
 
 ## TODOS:
 
-- [ ] Add Autoplay feature.
-
-- [ ] Add an Upload feature.
-
 - [ ] Build a custom Player.
 
 - [ ] Connect to imdb api.
@@ -32,3 +28,5 @@ HomeFlix - Local Streaming WebSite.
 - [ ] Add users feature.
 
 - [ ] Add Shuffle feature.
+
+- [ ] Add dynamic channels.
