@@ -3,7 +3,7 @@
 /*/
 
 import * as memory from './memory.js'
-
+ 
 //open the player panel.
 export function open_panel(id,type,block){
     let player = block.querySelector('.player');
@@ -106,6 +106,7 @@ function add_episodes(player,season,first_season=false){
         episode_ui.appendChild(elem);
     }
     block.appendChild(episode_ui);
+	episode_ui.style.columnCount = Math.ceil(season[1]/10);
 }
 
 //reset the selected button.
@@ -205,6 +206,7 @@ export function play_episode(player,season,episode,time=0){
 
 function get_current_episode(vid){
   //TODO: beautify
-  let extract = vid.querySelector('source').src.match(/[1-9]/g);
+  let extract = vid.querySelector('source').src.match(/[1-9]+/g);
+  console.log(extract)
   return {season:extract[0], episode:extract[1]};
 }
