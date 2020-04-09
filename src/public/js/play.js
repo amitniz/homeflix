@@ -163,19 +163,24 @@ function series_src(json,season,episode,ext){
 
 export function play_next(player){
   let pos = get_current_episode(player);
-  //get num of episode for given season.
-  console.log('ended');
-  obj[0].seasons.forEach(e=>{
-	  if(e[0] == pos.season && e[1] > pos.episode){
+  obj[0].seasons.some(e=>{
+	  if(e[0] == Number(pos.season) && e[1] > Number(pos.episode)){
 		  let season = 's'+pos.season;
 		  let episode = 'e' + String(Number(pos.episode)+1);
 		  play_episode(player,season,episode);
 		  memory.set_location(obj[0].name,season,episode);
+		  let block = player.parentElement.querySelector('ui');
+		  select_li(block.querySelector('#'+episode));
+		  return true;
 	  }else if(e[0] ==String(Number(pos.season)+1)){
 		  let season = 's'+String(Number(pos.season)+1);
-		  let episode ='e1'
+		  let episode = 'e1'
 		  play_episode(player,season,episode);
 		  memory.set_location(obj[0].name,season,episode);
+		  update_episodes_block(season);
+		  let block = player.parentElement.querySelector('ui');
+		  select_li(block.querySelector('#'+episode));
+		  return true;
 	  }
   })
 }
@@ -194,6 +199,7 @@ export function scroll_images(e){
 
 export function play_episode(player,season,episode,time=0){
   //TODO: replace the global variables.
+  if(!player.onended) player.onended = function(){play_next(player)};
   player.querySelector('.mp4').src = series_src(obj[0],season,episode,'mp4');
   player.querySelectorAll('.subs')[0].src =subs_src(obj[0],season,episode,'eng');
   player.querySelectorAll('.subs')[1].src =subs_src(obj[0],season,episode,'heb');
@@ -201,12 +207,9 @@ export function play_episode(player,season,episode,time=0){
   player.currentTime = time;
   player.play();
   //auto play
-  player.onended = function(){play_next(player)};
 }
 
 function get_current_episode(vid){
-  //TODO: beautify
   let extract = vid.querySelector('source').src.match(/[1-9]+/g);
-  console.log(extract)
   return {season:extract[0], episode:extract[1]};
 }
