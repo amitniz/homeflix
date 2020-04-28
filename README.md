@@ -14,19 +14,3 @@ HomeFlix - Local Streaming WebSite.
 
 ![homeflix player](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/player.png)
 
-
-
-
-## TODOS:
-
-- [ ] Build a custom Player.
-
-- [ ] Connect to imdb api.
-
-- [ ] Add search feature.
-
-- [ ] Add users feature.
-
-- [ ] Add Shuffle feature.
-
-- [ ] Add dynamic channels.
