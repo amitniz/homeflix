@@ -4,6 +4,7 @@ HomeFlix - Local Streaming WebSite.
 ## Stack
 - NodeJS
 - MongoDB
+- Docker
 - Python
 - JavaScript
 
