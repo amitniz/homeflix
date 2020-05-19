@@ -169,7 +169,7 @@ export function play_next(player){
 		  let episode = 'e' + String(Number(pos.episode)+1);
 		  play_episode(player,season,episode);
 		  memory.set_location(obj[0].name,season,episode);
-		  let block = player.parentElement.querySelector('ui');
+		  let block = player.parentElement.querySelector('ui#'+season);
 		  select_li(block.querySelector('#'+episode));
 		  return true;
 	  }else if(e[0] ==String(Number(pos.season)+1)){
@@ -178,7 +178,7 @@ export function play_next(player){
 		  play_episode(player,season,episode);
 		  memory.set_location(obj[0].name,season,episode);
 		  update_episodes_block(season);
-		  let block = player.parentElement.querySelector('ui');
+		  let block = player.parentElement.querySelector('ui#'+season);
 		  select_li(block.querySelector('#'+episode));
 		  return true;
 	  }
@@ -210,6 +210,6 @@ export function play_episode(player,season,episode,time=0){
 }
 
 function get_current_episode(vid){
-  let extract = vid.querySelector('source').src.match(/[1-9]+/g);
+  let extract = vid.querySelector('source').src.match(/(\d)+/g);
   return {season:extract[0], episode:extract[1]};
 }
