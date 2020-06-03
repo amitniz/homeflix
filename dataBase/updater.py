@@ -47,7 +47,7 @@ for t in types:
                     db.series.insert_one(sub_dirs)
                     print( "[+] Inserted: ", name(item))
                 elif db.series.find_one({"name":name(item)})['seasons']!=seasons_list:
-                    print( "[+}Updated: ",name(item))
+                    print( "[+]Updated: ",name(item))
                     db.series.update_one({"name":name(item)},{'$set':sub_dirs})
             else:
                 sub_dirs = dict(zip(['src','location','genre','name'],[src,LOCATION,g,name(item)]))
