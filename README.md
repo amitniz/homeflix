@@ -17,5 +17,4 @@ HomeFlix - Local Streaming WebSite.
 
 ## Installation
 After you clone the repository run inside the docker folder the next command:
-
-`docker-compose down && sudo docker-compose up &` 
+`docker-compose up` 
