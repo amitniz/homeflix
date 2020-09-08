@@ -15,3 +15,7 @@ HomeFlix - Local Streaming WebSite.
 
 ![homeflix player](https://github.com/AmitNiz/homeflix/blob/master/src/public/img/player.png)
 
+## Installation
+After you clone the repository run inside the docker folder the next command:
+
+`docker-compose down && sudo docker-compose up &` 
