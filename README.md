@@ -1,5 +1,5 @@
 # HOMEFLIX
-HomeFlix - Local Streaming WebSite.
+HomeFlix - Local Streaming Website.
 
 ## Stack
 - NodeJS
